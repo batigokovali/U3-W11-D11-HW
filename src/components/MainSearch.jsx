@@ -1,17 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
-import Job from "./Job";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { getJobsActionAsync } from "../redux/actions";
+import Job from "./Job";
 
 const MainSearch = () => {
   const [query, setQuery] = useState("");
   const dispatch = useDispatch()
-  const jobsFromTheReduxStore = useSelector((state) => state.job.content)
-
-  const baseEndpoint =
-    "https://strive-benchmark.herokuapp.com/api/jobs?search=";
+  const jobsFromTheReduxStore = useSelector((state) => state.jobs.stock.data)
+  console.log(jobsFromTheReduxStore)
 
   const handleChange = (e) => {
     setQuery(e.target.value);
@@ -22,8 +20,9 @@ const MainSearch = () => {
   };
 
   useEffect(() => {
-    dispatch(getJobsActionAsync())
+    dispatch(getJobsActionAsync(query))
   }, [])
+
 
   return (
     <Container>
@@ -47,9 +46,10 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={12} className="mx-auto mb-5">
-          {jobs.map((jobData, index) => (
-            <Job key={jobData._id} data={jobsFromTheReduxStore} index={index} />
-          ))}
+          {jobsFromTheReduxStore ? (
+            jobsFromTheReduxStore.map((jobData, i) => (
+              <Job key={jobData._id} i={i} data={jobData} />))
+          ) : (<h1>Loading...</h1>)}
         </Col>
       </Row>
     </Container>

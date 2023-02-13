@@ -1,14 +1,17 @@
 import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { removeFromFavoritesAction, REMOVE_FROM_FAVORITES, addToFavoritesAction, ADD_TO_FAVORITES } from '../redux/actions'
+import { BookmarkHeartFill } from "react-bootstrap-icons"
+import { BsFillBookmarkPlusFill, BsBookmarkDashFill } from "react-icons/bs"
 
-const Job = ({ data, index }) => {
+const Job = ({ data, i }) => {
   const dispatch = useDispatch();
   let favorites = useSelector((state) => state.favorites.content);
 
   return (
     <Row
-      className="mx-0 mt-3 p-3 d-flex align-items-center"
+      className="mx-0 mt-3 p-3 d-flex align-items-center jobs"
       style={{ border: "1px solid #00000033", borderRadius: 4 }}
     >
       <Col xs={3}>
@@ -20,24 +23,31 @@ const Job = ({ data, index }) => {
         </a>
       </Col>
       {favorites.some((job) => data._id === job._id) ? (
-        <Button
-          variant="danger"
-          onClick={() => {
-            dispatch(removeFromFavoritesAction(i))
-          }}
-        >
-          Delete
-        </Button>
+        <div className="ml-auto justify-content-center">
+          <Button
+            variant="danger"
+
+            onClick={() => {
+              dispatch(removeFromFavoritesAction(data._id))
+            }}
+          >
+            <BsBookmarkDashFill></BsBookmarkDashFill>
+          </Button>
+        </div>
+
       ) : (
-        <Button
-          className="ml-auto"
-          xs={1}
-          onClick={() => {
-            dispatch(addToFavoritesAction(data))
-          }}
-        >
-          Add to Favorites
-        </Button>
+        <div className="ml-auto justify-content-center">
+          <Button
+
+            xs={1}
+            onClick={() => {
+              dispatch(addToFavoritesAction(data))
+            }}
+          >
+            <BsFillBookmarkPlusFill></BsFillBookmarkPlusFill>
+          </Button>
+        </div>
+
       )}
     </Row>
   );

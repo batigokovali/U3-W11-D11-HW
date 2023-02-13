@@ -1,5 +1,7 @@
 import { Col, Row, Button, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { removeFromFavoritesAction } from '../redux/actions'
+import { BsFillBookmarkPlusFill, BsBookmarkDashFill } from "react-icons/bs"
 
 const Favorites = () => {
   let favorites = useSelector((state) => state.favorites.content);
@@ -14,7 +16,8 @@ const Favorites = () => {
         {favorites.map((job, i) => (
           <Row
             key={i}
-            className="my-4"
+            className="my-4 jobs"
+
             style={{ border: "1px solid #00000033", borderRadius: 4 }}
           >
             <Col className="d-flex align-items-center">
@@ -27,10 +30,10 @@ const Favorites = () => {
             <Button
               variant="danger"
               onClick={() => {
-                dispatch(removeFromFavoritesAction(i))
+                dispatch(removeFromFavoritesAction(job._id))
               }}
             >
-              Delete
+              <BsBookmarkDashFill />
             </Button>
           </Row>
         ))}

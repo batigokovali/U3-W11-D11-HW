@@ -1,7 +1,7 @@
 import { GET_JOBS } from "../actions";
 
 const initialState = {
-    content: [],
+    stock: [],
 }
 
 const jobReducer = (state = initialState, action) => {
@@ -9,9 +9,11 @@ const jobReducer = (state = initialState, action) => {
         case GET_JOBS:
             return {
                 ...state,
-                content: action.payload,
+                stock: action.payload,
             }
         default:
             return state
     }
 }
+
+export default jobReducer

@@ -23,10 +23,7 @@ const Job = ({ data, index }) => {
         <Button
           variant="danger"
           onClick={() => {
-            dispatch({
-              type: "REMOVE_FROM_FAVORITES",
-              payload: index,
-            });
+            dispatch(removeFromFavoritesAction(i))
           }}
         >
           Delete
@@ -36,10 +33,7 @@ const Job = ({ data, index }) => {
           className="ml-auto"
           xs={1}
           onClick={() => {
-            dispatch({
-              type: "ADD_TO_FAVORITES",
-              payload: data,
-            });
+            dispatch(addToFavoritesAction(data))
           }}
         >
           Add to Favorites

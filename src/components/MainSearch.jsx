@@ -17,11 +17,9 @@ const MainSearch = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(getJobsActionAsync(query))
   };
 
-  useEffect(() => {
-    dispatch(getJobsActionAsync(query))
-  }, [])
 
 
   return (

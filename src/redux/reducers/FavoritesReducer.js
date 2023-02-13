@@ -2,9 +2,7 @@ import { ADD_TO_FAVORITES } from "../actions";
 import { REMOVE_FROM_FAVORITES } from "../actions";
 
 const initialState = {
-  favorites: {
-    content: [],
-  },
+  content: [],
 };
 
 const FavoritesReducer = (state = initialState, action) => {
@@ -18,9 +16,7 @@ const FavoritesReducer = (state = initialState, action) => {
     case REMOVE_FROM_FAVORITES:
       return {
         ...state,
-        content: state.favorites.content.filter(
-          (el, i) => i !== action.payload
-        ),
+        content: state.favorites.content.filter((el, i) => i !== action.payload),
       };
 
     default:

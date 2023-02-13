@@ -7,7 +7,6 @@ import { getJobsActionAsync } from "../redux/actions";
 
 const MainSearch = () => {
   const [query, setQuery] = useState("");
-  const [jobs, setJobs] = useState([]);
   const dispatch = useDispatch()
   const jobsFromTheReduxStore = useSelector((state) => state.job.content)
 
